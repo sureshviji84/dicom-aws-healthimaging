@@ -12,6 +12,7 @@ const {
   PutBucketCorsCommand 
 } = require('@aws-sdk/client-s3');
 const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
+const dicomwebRoutes = require('./routes/dicomweb');
 require('dotenv').config();
 
 const app = express();
@@ -277,6 +278,30 @@ app.get('/api/health', (req, res) => {
     s3Status: process.env.NODE_ENV === 'production' ? 'enabled' : 'disabled',
     s3Bucket: process.env.NODE_ENV === 'production' ? process.env.S3_BUCKET_NAME : null
   });
+});
+
+// Add DICOMweb routes
+app.use('/api/dicomweb', dicomwebRoutes);
+
+// Add this after your other routes
+app.get('/api/test-s3', async (req, res) => {
+  try {
+    const command = new PutObjectCommand({
+      Bucket: process.env.S3_BUCKET_NAME,
+      Key: 'test.txt',
+      Body: 'Test file to verify S3 access'
+    });
+
+    await s3Client.send(command);
+    res.json({ message: 'Successfully wrote test file to S3' });
+  } catch (error) {
+    console.error('S3 test error:', error);
+    res.status(500).json({ 
+      error: 'Failed to write to S3',
+      details: error.message,
+      code: error.$metadata?.httpStatusCode
+    });
+  }
 });
 
 // Error handling middleware

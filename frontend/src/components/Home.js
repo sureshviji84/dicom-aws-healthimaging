@@ -99,13 +99,13 @@ const Home = () => {
   return (
     <div className="home">
       <header className="home-header">
-        <h1>DICOM File Upload</h1>
+        <h1>AWS Health Imaging - Proof of Concept</h1>
       </header>
       
       <main className="home-main">
         <div className="upload-container">
           <div className="upload-box">
-            <h2>Upload DICOM Files</h2>
+            <h2>Load DICOM Files</h2>
             
             <div className="upload-actions">
               <input

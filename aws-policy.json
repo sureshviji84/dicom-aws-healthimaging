@@ -1,0 +1,29 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "medical-imaging:SearchImageSets",
+                "medical-imaging:GetImageSet",
+                "medical-imaging:GetImageFrame",
+                "medical-imaging:StartDICOMImportJob",
+                "medical-imaging:GetDICOMImportJob",
+                "medical-imaging:ListDICOMImportJobs"
+            ],
+            "Resource": "arn:aws:medical-imaging:us-east-1:399537058161:datastore/*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::dicom-device-input-bucket",
+                "arn:aws:s3:::dicom-device-input-bucket/*"
+            ]
+        }
+    ]
+} 

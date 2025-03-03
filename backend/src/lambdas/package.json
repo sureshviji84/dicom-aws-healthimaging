@@ -1,0 +1,14 @@
+{
+  "name": "dicom-processor-lambdas",
+  "version": "1.0.0",
+  "description": "AWS Lambda functions for DICOM processing",
+  "main": "processQueue.js",
+  "dependencies": {
+    "@aws-sdk/client-medical-imaging": "^3.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+} 
